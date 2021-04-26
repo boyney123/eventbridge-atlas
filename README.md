@@ -1,6 +1,6 @@
 <div align="center">
 
-<h2>EventBridge Atlas</h2>
+<h2>AWS EventBridge Atlas</h2>
 <p>Open source tool to Document, Discover and share your EventBridge schemas.</>
 
   <hr />
