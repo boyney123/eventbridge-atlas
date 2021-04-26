@@ -13,13 +13,11 @@ import {
   generateSourceMetadata,
 } from './utils/js-to-markdown'
 
-require('dotenv').config({ path: path.resolve(process.cwd(), '.env.local') })
+require('dotenv').config({ path: path.resolve(process.cwd(), '.env') })
 
 const exec = require('./utils/exec')
 
 const generateFiles = async (allSchemasForEvents, eventRules) => {
-  await exec(`rm -rf ${path.join(__dirname, '../generated-docs')}`)
-
   await fs.ensureDirSync(path.join(__dirname, '../generated-docs'))
 
   const makeDocs = allSchemasForEvents.map(async (schema) => {
@@ -71,29 +69,31 @@ const init = async () => {
   console.log(`Fetching schemas in the registry: ${process.env.DISCOVERED_SCHEMAS_ARN}...`)
 
   const data = await exec(
-    `aws schemas list-schemas --registry-name ${process.env.DISCOVERED_SCHEMAS_ARN}`
+    `aws schemas list-schemas --registry-name ${process.env.DISCOVERED_SCHEMAS_ARN} --region ${process.env.REGION}`,
+    true
   )
   const { Schemas: schemas } = JSON.parse(data.stdout)
 
   try {
     // get all schemas as JSON schemas
-    console.log(`Getting ${schemas.length} schemas as JSON Schema...`)
+    console.log(`Found ${schemas.length} schemas on Event bus. Downloading schemas as JSON...`)
     const allEventSchemasAsJSONSchema = await Promise.all(await getAllSchemasAsJSONSchema(schemas))
 
     // JSON schema does not give us everything, lets hydrate the data with the open API stuff.
-    console.log(`Hydraing scheams with OPEN API data...`)
+    console.log(`Now hydraing scheams with extra OPEN API data...`)
     const requestsToGetAllSchemas = await hydrateSchemasWithAdditionalOpenAPIData(
       allEventSchemasAsJSONSchema
     )
 
     const allSchemasForEvents = await Promise.all(requestsToGetAllSchemas)
 
-    console.log(`Now getting target information for your events...`)
+    console.log(`Now getting target/rule information for events`)
     const targets = await getTargetsForEventsOnEventBridge()
 
+    console.log(`AWS Import complete. Now generating your documentation....`)
     await generateFiles(allSchemasForEvents, targets)
 
-    console.log(`Finished generating markdown files`)
+    console.log(`Finished generating`)
   } catch (error) {
     console.log('e', error)
   }

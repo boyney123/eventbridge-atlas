@@ -25,7 +25,7 @@ exec.spawn = function spawn(command = '', opts = {}) {
       ...env,
       ...opts.env,
     },
-    stdio: opts.stdio || 'inherit',
+    stdio: opts.stdio || 'ignore',
   })
 
   child.on('exit', (code, signal) => {

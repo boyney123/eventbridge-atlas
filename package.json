@@ -8,11 +8,11 @@
     "lib": "lib"
   },
   "scripts": {
-    "import-from-aws": "babel-node src/index.js",
-    "edit-output": "babel-node src/edit-output.js",
-    "generate-docs": "docker build -t eventbridge-docs -f Dockerfile . && docker run -v $(pwd)/:/usr/src/eventbridge-docs eventbridge-docs",
-    "start": "npm run edit-output && http-server docs-html",
-    "import-and-start": "npm run import-from-aws && npm run generate-docs && npm run edit-output && npm run start"
+    "clean": "rimraf docs-html && rimraf generated-docs",
+    "import-from-aws-and-generate-markdown": "babel-node src/index.js",
+    "add-event-atlas-ui-changes": "babel-node src/add-event-atlas-ui-changes.js",
+    "start": "http-server docs-html",
+    "start:local": "sh scripts/local.sh"
   },
   "keywords": [],
   "author": "David Boyne",
@@ -22,7 +22,7 @@
     "dotenv": "^8.2.0",
     "fs-extra": "^9.1.0",
     "http-server": "^0.12.3",
-    "json-schema-faker": "^0.5.0-rcv.34"
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

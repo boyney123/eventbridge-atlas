@@ -16,11 +16,11 @@
 
 <hr />
 
-<!-- <img alt="header" src="./images/demo.gif" /> -->
+<img alt="header" src="./images/full-app-screenshot.png" />
 
   <h3>Features: Explore Schemas, Show Examples, Descriptions on events and properties, and more...</h3>
 
-[Read the Docs](https://eventbridge-atlas.netlify.com/) | [Edit the Docs](https://github.com/boyney123/eventbridge-docs)
+[Read the Docs](https://eventbridge-atlas.netlify.app/) | [Edit the Docs](https://github.com/boyney123/eventbridge-atlas-docs)
 
 </div>
 
@@ -38,7 +38,7 @@ This tool uses `aws-cli` and `docuowl` to automatically generate documentation f
 
 # Getting Started
 
-➡️ [Head over to the docs to get started.](https://eventbridge-atlas.netlify.com/)
+➡️ [Head over to the docs to get started.](https://eventbridge-atlas.netlify.app/)
 
 # Tools
 
