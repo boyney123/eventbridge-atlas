@@ -10,7 +10,6 @@
 
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
-[![Tweet][twitter-badge]][twitter]
 
 [By me a 🍺](https://www.paypal.me/boyney123/5)
 
@@ -58,8 +57,6 @@ If you have any questions, features or issues please raise any issue or pull req
 [prs]: http://makeapullrequest.com
 [github-watch-badge]: https://img.shields.io/github/watchers/boyney123/eventbridge-atlas.svg?style=social
 [github-watch]: https://github.com/boyney123/eventbridge-atlas/watchers
-[twitter]: https://twitter.com/intent/tweet?text=Check%20out%20mockit%20by%20%40boyney123%20https%3A%2F%2Fgithub.com%2Fboyney123%2Fmockit%20%F0%9F%91%8D
-[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/boyney123/eventbridge-atlas.svg?style=social
 [github-star-badge]: https://img.shields.io/github/stars/boyney123/eventbridge-atlas.svg?style=social
 [github-star]: https://github.com/boyney123/eventbridge-atlas/stargazers
 
