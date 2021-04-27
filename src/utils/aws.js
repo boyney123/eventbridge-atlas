@@ -13,7 +13,7 @@ export const getTargetsForEventsOnEventBridge = async () => {
 export const getAllSchemasAsJSONSchema = async (schemaList) => {
   return schemaList.map(async (schema) => {
     return exec(
-      `aws schemas export-schema --registry-name discovered-schemas --region ${process.env.REGION} --schema-name ${schema.SchemaName} --type JSONSchemaDraft4`,
+      `aws schemas export-schema --registry-name ${process.env.SCHEMA_REGISTRY_NAME} --region ${process.env.REGION} --schema-name ${schema.SchemaName} --type JSONSchemaDraft4`,
       true
     )
   })
@@ -25,7 +25,7 @@ export const hydrateSchemasWithAdditionalOpenAPIData = async (schemas) => {
 
     // get the schema as open API too, as its has more metadata we might find useful.
     const openAPISchema = await exec(
-      `aws schemas describe-schema --registry-name discovered-schemas --schema-name ${schema.SchemaName} --region ${process.env.REGION}`,
+      `aws schemas describe-schema --registry-name ${process.env.SCHEMA_REGISTRY_NAME} --schema-name ${schema.SchemaName} --region ${process.env.REGION}`,
       true
     )
     const schemaAsOpenAPI = buildSchema(openAPISchema)

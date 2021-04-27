@@ -66,10 +66,10 @@ const generateFiles = async (allSchemasForEvents, eventRules) => {
 
 const init = async () => {
   // make request to get all schemas in the registry
-  console.log(`Fetching schemas in the registry: ${process.env.DISCOVERED_SCHEMAS_ARN}...`)
+  console.log(`Fetching schemas in the registry: ${process.env.SCHEMA_REGISTRY_NAME}...`)
 
   const data = await exec(
-    `aws schemas list-schemas --registry-name ${process.env.DISCOVERED_SCHEMAS_ARN} --region ${process.env.REGION}`,
+    `aws schemas list-schemas --registry-name ${process.env.SCHEMA_REGISTRY_NAME} --region ${process.env.REGION}`,
     true
   )
   const { Schemas: schemas } = JSON.parse(data.stdout)
