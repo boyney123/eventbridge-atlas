@@ -3,15 +3,11 @@
 <h2>AWS EventBridge Atlas 🗺</h2>
 <p>Document, Discover and Share AWS EventBridge Schemas.</>
 
-  <hr />
-
 [![MIT License][license-badge]][license]
 [![PRs Welcome][prs-badge]][prs]
 
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
-
-[By me a 🍺](https://www.paypal.me/boyney123/5)
 
 <hr />
 
