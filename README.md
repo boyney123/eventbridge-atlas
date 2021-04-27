@@ -35,9 +35,11 @@ I'm a huge fan of AWS EventBridge and I wrote this tool to help engineers gain a
 
 # This solution
 
-This tool uses a combination of open source tools to automatically generate documentation for engineers. 
+<img alt="header" src="./images/architecture.png" />
 
-EventBridge Atlas will output static HTML, so you can host your documentation anywhere! 
+This tool uses a combination of open source tools to automatically generate documentation for engineers.
+
+EventBridge Atlas will output static HTML, so you can host your documentation anywhere!
 
 # Getting Started
 
