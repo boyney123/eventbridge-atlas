@@ -56,7 +56,7 @@ EventBridge Atlas has its own documentation website. To get started head over th
 If you have any questions, features or issues please raise any issue or pull requests you like. I will try my best to get back to you.
 
 [license-badge]: https://img.shields.io/github/license/boyney123/eventbridge-atlas.svg?color=yellow
-[license]: https://github.com/boyney123/eventbridge-atlas/blob/main/LICENSE
+[license]: https://github.com/boyney123/eventbridge-atlas/blob/main/LICENCE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
 [github-watch-badge]: https://img.shields.io/github/watchers/boyney123/eventbridge-atlas.svg?style=social
