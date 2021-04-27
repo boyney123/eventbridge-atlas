@@ -23,17 +23,27 @@
 
 # The problem
 
-Event discovery is continous and does not stop at Event storming. As organistions grow and your Event Architecture grows its important that people have access and understanding of the events within your domain.
+Event-Driven Architectures allow us to scale, be agile and keen our architecture decoupled. Ultimately I believe they help us work more efficiently.
 
-This tool was built to help document and share schemas between people within your teams.
+When starting off with Event-Driven Architectures we spend time discovering our core business events, writing code to match them and maintain versions going forward.
+
+Over a period of time more events are added to our domain, requirements change, and our architecture scales.
+
+It can become difficult to know and understand what events are flowing within our domain.
+
+I'm a huge fan of AWS EventBridge and I wrote this tool to help engineers gain and keep an understanding of events that flow through their domain.
 
 # This solution
 
-This tool uses `aws-cli` and `docuowl` to automatically generate documentation for your EventBridge schemas. The tool will output static HTML that you can host anywhere.
+This tool uses a combination of open source tools to automatically generate documentation for engineers. 
+
+EventBridge Atlas will output static HTML, so you can host your documentation anywhere! 
 
 # Getting Started
 
-➡️ [Head over to the docs to get started.](https://eventbridge-atlas.netlify.app/)
+EventBridge Atlas has its own documentation website. To get started head over there.
+
+➡️ [Documentation](https://eventbridge-atlas.netlify.app/)
 
 # Tools
 
@@ -45,10 +55,8 @@ This tool uses `aws-cli` and `docuowl` to automatically generate documentation f
 
 If you have any questions, features or issues please raise any issue or pull requests you like. I will try my best to get back to you.
 
-[spectrum-badge]: https://withspectrum.github.io/badge/badge.svg
-[spectrum]: https://spectrum.chat/explore-tech
-[license-badge]: https://img.shields.io/github/license/boyney123/mockit.svg?color=yellow
-[license]: https://github.com/boyney123/react.explore-tech.org/blob/master/LICENSE
+[license-badge]: https://img.shields.io/github/license/boyney123/eventbridge-atlas.svg?color=yellow
+[license]: https://github.com/boyney123/eventbridge-atlas/blob/main/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
 [github-watch-badge]: https://img.shields.io/github/watchers/boyney123/eventbridge-atlas.svg?style=social
