@@ -2,6 +2,12 @@
 
 # Requires, AWS-CLI & Docker installed
 
+# Consume the .env file
+if [ ! -f ../.env ]
+then
+  export $(cat .env | xargs)
+fi
+
 npm run clean
 
 npm run import-from-aws-and-generate-markdown
