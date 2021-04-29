@@ -18,6 +18,8 @@
   "author": "David Boyne",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-eventbridge": "^3.13.1",
+    "@aws-sdk/client-schemas": "^3.13.1",
     "cheerio": "^1.0.0-rc.6",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.1.0",

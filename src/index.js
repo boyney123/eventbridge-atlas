@@ -3,6 +3,7 @@ const fs = require('fs-extra')
 const eventMetaData = require('../data/event-metadata.json')
 
 import {
+  getAllSchemas,
   getTargetsForEventsOnEventBridge,
   getAllSchemasAsJSONSchema,
   hydrateSchemasWithAdditionalOpenAPIData,
@@ -65,30 +66,29 @@ const generateFiles = async (allSchemasForEvents, eventRules) => {
 }
 
 const init = async () => {
-  // make request to get all schemas in the registry
-  console.log(`Fetching schemas in the registry: ${process.env.SCHEMA_REGISTRY_NAME}...`)
-
-  const data = await exec(
-    `aws schemas list-schemas --registry-name ${process.env.SCHEMA_REGISTRY_NAME} --region ${process.env.REGION}`,
-    true
-  )
-  const { Schemas: schemas } = JSON.parse(data.stdout)
-
   try {
+    // make request to get all schemas in the registry
+    console.log(`Fetching schemas in the registry: ${process.env.SCHEMA_REGISTRY_NAME}...`)
+    const schemasFound = await getAllSchemas(process.env.SCHEMA_REGISTRY_NAME)
+
     // get all schemas as JSON schemas
-    console.log(`Found ${schemas.length} schemas on Event bus. Downloading schemas as JSON...`)
-    const allEventSchemasAsJSONSchema = await Promise.all(await getAllSchemasAsJSONSchema(schemas))
+    console.log(`Found ${schemasFound.Schemas.length} schemas on Event bus. Downloading schemas as JSON...`)
+    const allEventSchemasAsJSONSchema = await Promise.all(await getAllSchemasAsJSONSchema(
+      process.env.SCHEMA_REGISTRY_NAME,
+      schemasFound.Schemas
+    ))
 
     // JSON schema does not give us everything, lets hydrate the data with the open API stuff.
     console.log(`Now hydraing scheams with extra OPEN API data...`)
     const requestsToGetAllSchemas = await hydrateSchemasWithAdditionalOpenAPIData(
+      process.env.SCHEMA_REGISTRY_NAME,
       allEventSchemasAsJSONSchema
     )
 
     const allSchemasForEvents = await Promise.all(requestsToGetAllSchemas)
 
     console.log(`Now getting target/rule information for events`)
-    const targets = await getTargetsForEventsOnEventBridge()
+    const targets = await getTargetsForEventsOnEventBridge(process.env.EVENT_BUS_NAME)
 
     console.log(`AWS Import complete. Now generating your documentation....`)
     await generateFiles(allSchemasForEvents, targets)
