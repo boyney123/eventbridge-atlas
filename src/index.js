@@ -23,7 +23,7 @@ const generateFiles = async (allSchemasForEvents, eventRules) => {
   const makeDocs = allSchemasForEvents.map(async (schema) => {
     const { Content = {}, SchemaName, SchemaVersion } = schema
 
-    const source = Content['x-amazon-events-source'].replace('DeadHappy', 'MyApp')
+    const source = Content['x-amazon-events-source']
     const detailType = Content['x-amazon-events-detail-type']
     const sourceDescription = eventMetaData?.[source]?.metadata?.title || ''
 
