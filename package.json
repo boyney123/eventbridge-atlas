@@ -9,20 +9,26 @@
   },
   "scripts": {
     "clean": "rimraf docs-html && rimraf generated-docs",
-    "import-from-aws-and-generate-markdown": "babel-node src/index.js",
-    "add-event-atlas-ui-changes": "babel-node src/add-event-atlas-ui-changes.js",
-    "start": "http-server docs-html",
-    "start:local": "sh scripts/local.sh"
+    "generate": "babel-node src/index.js",
+    "build:docuowl": "npm run clean --silent  && npm run generate --silent -- --format=docuowl",
+    "build:asyncapi": "npm run clean --silent && npm run generate --silent -- --format=asyncapi",
+    "start-server": "http-server"
   },
   "keywords": [],
   "author": "David Boyne",
   "license": "MIT",
   "dependencies": {
+    "@asyncapi/generator": "^1.6.13",
+    "@aws-sdk/client-eventbridge": "^3.14.0",
+    "@aws-sdk/client-schemas": "^3.14.0",
+    "chalk": "^4.1.1",
     "cheerio": "^1.0.0-rc.6",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.1.0",
     "http-server": "^0.12.3",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "yaml": "^1.10.2",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

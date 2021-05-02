@@ -13,7 +13,7 @@
 
 <img alt="header" src="./images/full-app-screenshot.png" />
 
-  <h3>Features: Parses schemas into documentation, shows rules matched to your events, add metadata to each event property, fuzzy search, show example events, light & dark more, and more...</h3>
+  <h3>Features: Parses schemas into documentation solutions, shows rules matched to your events, add metadata to each event property, fuzzy search, show example events, light & dark more, and more...</h3>
 
 [Read the Docs](https://eventbridge-atlas.netlify.app/) | [Edit the Docs](https://github.com/boyney123/eventbridge-atlas-docs)
 

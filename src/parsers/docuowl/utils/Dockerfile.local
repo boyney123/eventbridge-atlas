@@ -1,0 +1,6 @@
+FROM node:15.4.0-alpine
+
+RUN mkdir -p /usr/src/eventbridge-atlas
+WORKDIR /usr/src/eventbridge-atlas
+
+CMD ["./src/parsers/docuowl/lib/docuowl", "--input", "generated-docs/docuowl", "--output", "docs-html/docuowl"]
