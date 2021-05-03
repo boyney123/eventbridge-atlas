@@ -59,7 +59,7 @@ const generateJSONForAsyncAPI = ({ eventBus, eventSchemas, eventTargets }) => {
     rules.forEach((rule) => {
       if (generatedMessages[detailType]) {
         channels[rule] = {
-          description: 'here is a description of this lambda',
+          description: '', //TODO: populate with customer descriptions of lambda?
           subscribe: {
             message: {
               $ref: `#/components/messages/${detailType}`,

@@ -92,7 +92,7 @@ const init = async () => {
       await wrapup()
     }
 
-    console.log(
+    log(
       `
 
     Finished generating documentation!

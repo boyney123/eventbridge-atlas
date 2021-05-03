@@ -5,8 +5,8 @@ const schemas = new Schemas()
 const eventbridge = new EventBridge()
 
 export const getTargetsForEventsOnEventBridge = async (eventBusName) => {
-  console.log('Getting targets for events....')
   const targetsForEvents = await eventbridge.listRules({ EventBusName: eventBusName })
+
   return buildTargets(targetsForEvents.Rules)
 }
 
@@ -51,8 +51,8 @@ export const buildSchema = (rawSchema) => {
   return { ...rawSchema, Content: JSON.parse(rawSchema.Content) }
 }
 
-export const buildTargets = ({ Rules = [] }) => {
-  return Rules.reduce((rules, rule) => {
+export const buildTargets = (busRules) => {
+  return busRules.reduce((rules, rule) => {
     const eventPattern = JSON.parse(rule.EventPattern)
     const detailType = eventPattern['detail-type'] || []
     detailType.forEach((detail) => {
