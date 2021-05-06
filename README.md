@@ -13,7 +13,7 @@
 
 <img alt="header" src="./images/full-app-screenshot.png" />
 
-  <h3>Features: Parses schemas into documentation solutions, shows rules matched to your events, add metadata to each event property, fuzzy search, show example events, light & dark more, and more...</h3>
+  <h3>Features: Parses EventBridge schemas into documentation solutions, shows rules matched to your events, add metadata to each event property, support slate, AsyncAPI and docuowl output, and more...</h3>
 
 [Read the Docs](https://eventbridge-atlas.netlify.app/) | [Edit the Docs](https://github.com/boyney123/eventbridge-atlas-docs)
 
@@ -35,23 +35,50 @@ I'm a huge fan of AWS EventBridge and I wrote this tool to help engineers gain a
 
 # This solution
 
-<img alt="header" src="./images/architecture.png" />
+<img alt="header" src="./images/architecture-2.png" />
 
-This tool uses a combination of open source tools to automatically generate documentation for engineers.
+EventBridge atlas uses [parsers](https://eventbridge-atlas.netlify.app/docs/parsers/intro) t
 
-EventBridge Atlas will output static HTML, so you can host your documentation anywhere!
+EventBridge atlas uses a combination of open source tools to automatically generate documentation for engineers.
+
+EventBridge Atlas downloads your schemas and parses them into various different outputs (you decide) and ouputs static HTML. So you can host your documentation anywhere!
+
+You can read more on [how it works on the website](https://eventbridge-atlas.netlify.app/docs/how-it-works)
 
 # Getting Started
 
-EventBridge Atlas has its own documentation website. To get started head over there.
+You should be able to get setup within minutes if you head over to our documentation to get started 👇
 
-➡️ [Documentation](https://eventbridge-atlas.netlify.app/)
+➡️ [Get Started](https://eventbridge-atlas.netlify.app/)
+
+# Examples
+
+Here are some screenshots of examples of what EventBridge Atlas can produce using its parsers.
+
+Your AWS Schemas are transformed into the following documentation tools:
+
+## Slate Parser
+
+<img alt="header" src="./images/slate-example.png" />
+
+## AsyncAPI Parser
+
+<img alt="header" src="./images/asyncapi-example.png" />
+
+## Docuowl Parser
+
+<img alt="header" src="./images/docuowl-example.png" />
 
 # Tools
 
 - [Docker](https://www.docker.com/)
+- [aws sdk](https://aws.amazon.com/cli/)
+
+### Documentation tools (Parsers)
+
 - [docuowl](https://github.com/docuowl/docuowl)
-- [aws cli](https://aws.amazon.com/cli/)
+- [slate](https://github.com/slatedocs/slate)
+- [AsyncAPI](https://asyncapi.com)
 
 # Contributing
 
@@ -66,11 +93,9 @@ If you have any questions, features or issues please raise any issue or pull req
 [github-star-badge]: https://img.shields.io/github/stars/boyney123/eventbridge-atlas.svg?style=social
 [github-star]: https://github.com/boyney123/eventbridge-atlas/stargazers
 
-# Donating
+# Sponsor
 
-If you find this tool useful, feel free to buy me a ☕ 👍
-
-[Buy a drink](https://www.paypal.me/boyney123/5)
+Coming soon 👀
 
 # License
 
