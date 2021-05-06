@@ -37,3 +37,7 @@ docs-html/
 generated-docs/
 
 package-lock.json
+
+# Slate Ignores
+src/parsers/slate/lib/index.html.md
+src/parsers/slate/build

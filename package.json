@@ -12,6 +12,7 @@
     "generate": "babel-node src/index.js",
     "build:docuowl": "npm run clean --silent  && npm run generate --silent -- --format=docuowl",
     "build:asyncapi": "npm run clean --silent && npm run generate --silent -- --format=asyncapi",
+    "build:slate": "npm run clean --silent && npm run generate --silent -- --format=slate",
     "start-server": "http-server"
   },
   "keywords": [],
@@ -26,6 +27,7 @@
     "dotenv": "^8.2.0",
     "fs-extra": "^9.1.0",
     "http-server": "^0.12.3",
+    "json2md": "^1.10.0",
     "rimraf": "^3.0.2",
     "yaml": "^1.10.2",
     "yargs": "^16.2.0"

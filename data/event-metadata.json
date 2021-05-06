@@ -1,4 +1,7 @@
 {
+  "eventbus": {
+    "description": "Welcome to the EventBridge Atlas! You can use this tool to help you document and share your eventbridge schemas with others. Customise this title, event descriptions, event properties and more! "
+  },
   "yourevent.source": {
     "metadata": {
       "title": "Some general description for this event source"
@@ -11,20 +14,15 @@
           "email": "The email of the customer"
         },
         "example": {
-          "version": "100",
-          "id": "5d57eb17-c910-b2de-3996-6b98c5f60dbc",
-          "detail-type": "UserCreated",
-          "source": "yourevent.source",
-          "account": "764738355555",
-          "time": "2021-03-12T12:53:38Z",
-          "region": "eu-west-1",
-          "resources": [],
-          "detail": {
-            "data": {
-              "name": "Dave",
-              "email": "dave@boyney.io"
-            }
-          }
+          "Time": "2020-07-14T00:00:00Z",
+          "Source": "myapp.users",
+          "Resources": ["1"],
+          "DetailType": "UserCreated",
+          "Detail": {
+            "name": "David",
+            "email": "dave@boyney.io"
+          },
+          "EventBusName": "myapp-event-bus-stg"
         }
       }
     }

@@ -7,6 +7,8 @@ import { hideBin } from 'yargs/helpers'
 import chalk from 'chalk'
 import fs from 'fs-extra'
 
+import Registry from './models/Registry'
+
 import * as parsers from './parsers'
 import {
   getTargetsForEventsOnEventBridge,
@@ -76,6 +78,7 @@ const init = async () => {
       eventSchemas: allSchemasForEvents,
       eventTargets: targets,
       buildDir,
+      registry: new Registry(allSchemasForEvents, targets),
     })
 
     log(
