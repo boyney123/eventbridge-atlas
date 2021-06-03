@@ -11,7 +11,9 @@ export default class Schema {
     this.schema = Content
     this.rules = rules
     this.version = SchemaVersion
-    this.description = eventMetaData?.[source]?.metadata?.title || ''
+    this.sourceDescription = eventMetaData?.[source]?.metadata?.title || ''
+    this.description = eventMetaData?.[source]?.events?.[detailType]?.description || ''
+    this.author = eventMetaData?.[source]?.events?.[detailType]?.author || ''
     this.properties = eventMetaData?.[source]?.events?.[detailType]?.properties || {}
     this.example = eventMetaData?.[source]?.events?.[detailType]?.example
   }

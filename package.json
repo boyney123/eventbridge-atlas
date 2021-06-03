@@ -12,6 +12,7 @@
     "generate": "babel-node src/index.js",
     "build:docuowl": "npm run clean --silent  && npm run generate --silent -- --format=docuowl",
     "build:asyncapi": "npm run clean --silent && npm run generate --silent -- --format=asyncapi",
+    "build:flow": "npm run clean --silent && npm run generate --silent -- --format=flow",
     "build:slate": "npm run clean --silent && npm run generate --silent -- --format=slate",
     "start-server": "http-server"
   },
@@ -22,19 +23,31 @@
     "@asyncapi/generator": "^1.6.13",
     "@aws-sdk/client-eventbridge": "^3.14.0",
     "@aws-sdk/client-schemas": "^3.14.0",
+    "@headlessui/react": "^1.2.0",
+    "@heroicons/react": "^1.0.1",
+    "@monaco-editor/react": "^4.1.3",
     "chalk": "^4.1.1",
     "cheerio": "^1.0.0-rc.6",
     "dotenv": "^8.2.0",
     "fs-extra": "^9.1.0",
+    "html-webpack-plugin": "^5.3.1",
     "http-server": "^0.12.3",
     "json2md": "^1.10.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-flow-renderer": "^9.6.0",
     "rimraf": "^3.0.2",
     "yaml": "^1.10.2",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.16",
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
     "@babel/node": "^7.13.13",
-    "@babel/preset-env": "^7.13.15"
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
   }
 }

@@ -78,7 +78,7 @@ const init = async () => {
       eventSchemas: allSchemasForEvents,
       eventTargets: targets,
       buildDir,
-      registry: new Registry(allSchemasForEvents, targets),
+      registry: new Registry(allSchemasForEvents, targets, EVENT_BUS_NAME),
     })
 
     log(
