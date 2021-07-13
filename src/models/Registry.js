@@ -1,9 +1,8 @@
-import eventMetaData from '../../data/event-metadata.json'
 import Schema from './Schema'
 
 export default class Registry {
   constructor(awsSchemas, allRulesForEvents, eventBusName) {
-    this.description = eventMetaData?.eventbus?.description || ''
+    this.description = ''
     this.eventBusName = eventBusName
     this.events = awsSchemas.map((schema) => {
       const { Content } = schema
