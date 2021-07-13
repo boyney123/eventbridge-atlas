@@ -1,7 +1,6 @@
 import path from 'path'
 import fs from 'fs-extra'
 import YAML from 'yaml'
-import eventMetaData from '../../../../data/event-metadata.json'
 
 require('dotenv').config({ path: path.resolve(process.cwd(), '.env') })
 
@@ -11,20 +10,14 @@ function replaceDeinitionsWithComponents(obj) {
   return JSON.parse(replacedWords)
 }
 
-const generateJSONForAsyncAPI = ({ eventBus, eventSchemas, eventTargets }) => {
-  const generatedMessages = eventSchemas.reduce((messages, schema) => {
-    const { Content = {}, SchemaName, SchemaVersion } = schema
-    const source = Content['x-amazon-events-source']
-    const detailType = Content['x-amazon-events-detail-type']
-    const sourceDescription = eventMetaData?.[source]?.metadata?.title || ''
-
-    const { description = '', properties, example } =
-      eventMetaData?.[source]?.events?.[detailType] || {}
+const generateJSONForAsyncAPI = ({ eventBus, registry }) => {
+  const generatedMessages = registry.getEvents().reduce((messages, schema) => {
+    const detailType = schema.detailType
 
     messages[detailType] = {
       name: detailType,
       title: '', // has to be set at the moment?
-      summary: description,
+      summary: schema.description,
       payload: {
         $ref: `#/components/schemas/${detailType}Payload`,
       },
@@ -33,17 +26,14 @@ const generateJSONForAsyncAPI = ({ eventBus, eventSchemas, eventTargets }) => {
     return messages
   }, {})
 
-  const generatedSchemas = eventSchemas.reduce((schemas, schema) => {
-    const { Content = {}, SchemaName, SchemaVersion } = schema
-    const source = Content['x-amazon-events-source']
-    const detailType = Content['x-amazon-events-detail-type']
-    const sourceDescription = eventMetaData?.[source]?.metadata?.title || ''
+  const generatedSchemas = registry.getEvents().reduce((schemas, schema) => {
+    const detailType = schema.detailType
 
-    const { properties, definitions = [] } = Content
+    const { properties, definitions = [] } = schema.schema
 
     schemas[`${detailType}Payload`] = {
       type: 'object',
-      properties,
+      properties: properties,
     }
 
     Object.keys(definitions).forEach((definition) => {
@@ -53,8 +43,9 @@ const generateJSONForAsyncAPI = ({ eventBus, eventSchemas, eventTargets }) => {
     return schemas
   }, {})
 
-  const generatedChannels = Object.keys(eventTargets).reduce((channels, detailType) => {
-    const { rules = [] } = eventTargets[detailType]
+  const generatedChannels = registry.getEvents().reduce((channels, schema) => {
+    const rules = schema.rules || []
+    const detailType = schema.detailType
 
     rules.forEach((rule) => {
       if (generatedMessages[detailType]) {
@@ -86,8 +77,8 @@ const generateJSONForAsyncAPI = ({ eventBus, eventSchemas, eventTargets }) => {
   }
 }
 
-export default async ({ eventBus, eventSchemas, eventTargets, buildDir }) => {
+export default async ({ eventBus, buildDir, registry }) => {
   const asyncAPIYml = new YAML.Document()
-  asyncAPIYml.contents = generateJSONForAsyncAPI({ eventBus, eventSchemas, eventTargets })
+  asyncAPIYml.contents = generateJSONForAsyncAPI({ eventBus, registry })
   await fs.writeFile(path.join(buildDir, './events.yml'), asyncAPIYml.toString())
 }

@@ -63,15 +63,32 @@ export default async ({ eventBus, buildDir, registry }) => {
       markdown.push({ blockquote: 'Schema' })
       markdown.push({ code: { language: 'json', content: JSON.stringify(event.schema, null, 4) } })
 
-      if (hasDescriptionsOnEventProperties)
-        markdown.push({
-          table: {
-            headers: ['property', 'description'],
-            rows: Object.keys(event.properties).map((property) => {
-              return { property, description: event.properties[property] }
-            }),
-          },
+      const hasDetailProperties = Object.keys(event.detailProperties).lengh > 0
+
+      if (hasDetailProperties) {
+        markdown.push({ h3: 'Detail Definitions' })
+
+        Object.keys(event.detailProperties).map((rootKey) => {
+          const detailRootObject = event.detailProperties[rootKey]
+
+          markdown.push({ h4: `${rootKey}` })
+
+          markdown.push({
+            table: {
+              headers: ['property', 'type', 'description'],
+              rows: Object.keys(detailRootObject).map((property) => {
+                return {
+                  property,
+                  type: detailRootObject[property]?.type,
+                  description: detailRootObject[property]?.description,
+                }
+              }),
+            },
+          })
         })
+      }
+
+   
     })
   })
 

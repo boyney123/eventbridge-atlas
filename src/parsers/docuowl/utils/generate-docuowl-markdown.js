@@ -7,11 +7,14 @@ Title: ${detailType}
 ${description}
 
 ${descriptionsForProperties ? `
-## Detail Properties
-${Object.keys(descriptionsForProperties).map(property => `
-- \`${property}\` - ${descriptionsForProperties[property]}
-`)}
-` : ''}
+
+## Detail Definitions
+
+${Object.keys(descriptionsForProperties).map(rootKey => `
+#### ${rootKey}
+${Object.keys(descriptionsForProperties[rootKey]).map(property => `
+- \`${property}\` - ${descriptionsForProperties[rootKey][property]?.type} - ${descriptionsForProperties[rootKey][property].description}`)}
+`)}` : ''}
 
 <br />
 
@@ -19,7 +22,6 @@ ${rulesForDetailType.length > 0 ? `
 ## Event Rules
 ${rulesForDetailType.map(rule => `- \`${rule}\``)}
 ` : ''}
-
 
 <br />
 
@@ -32,6 +34,7 @@ ${rulesForDetailType.map(rule => `- \`${rule}\``)}
 
 export const generateSideNotesForDetailType = ({ schema, example }) => {
     return `
+
 ${example ? `
 #! Event Example
 \`\`\`json
