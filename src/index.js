@@ -75,8 +75,6 @@ const init = async () => {
     // Build the required formats for tools
     await init({
       eventBus: EVENT_BUS_NAME,
-      eventSchemas: allSchemasForEvents,
-      eventTargets: targets,
       buildDir,
       registry: new Registry(allSchemasForEvents, targets, EVENT_BUS_NAME),
     })

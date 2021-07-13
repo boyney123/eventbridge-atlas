@@ -10,6 +10,7 @@
   "scripts": {
     "clean": "rimraf docs-html && rimraf generated-docs",
     "generate": "babel-node src/index.js",
+    "generate-eventmetadata": "babel-node src/utils/generate-metadata-templates",
     "build:docuowl": "npm run clean --silent  && npm run generate --silent -- --format=docuowl",
     "build:asyncapi": "npm run clean --silent && npm run generate --silent -- --format=asyncapi",
     "build:flow": "npm run clean --silent && npm run generate --silent -- --format=flow",
@@ -32,11 +33,13 @@
     "fs-extra": "^9.1.0",
     "html-webpack-plugin": "^5.3.1",
     "http-server": "^0.12.3",
+    "json-schema-faker": "^0.5.0-rcv.35",
     "json2md": "^1.10.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-flow-renderer": "^9.6.0",
     "rimraf": "^3.0.2",
+    "uuid": "^8.3.2",
     "yaml": "^1.10.2",
     "yargs": "^16.2.0"
   },

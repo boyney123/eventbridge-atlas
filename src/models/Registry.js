@@ -25,6 +25,10 @@ export default class Registry {
     )
   }
 
+  getEvents(){
+    return this.events
+  }
+
   getEventsByEventSource() {
     return this.events.reduce((eventsBySource, event) => {
       if (eventsBySource[event.source] === undefined) eventsBySource[event.source] = []
