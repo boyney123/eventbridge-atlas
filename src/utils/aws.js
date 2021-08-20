@@ -1,8 +1,14 @@
+const path = require('path')
 const { EventBridge } = require('@aws-sdk/client-eventbridge')
 const { Schemas } = require('@aws-sdk/client-schemas')
+require('dotenv').config({ path: path.resolve(process.cwd(), '.env') })
 
-const schemas = new Schemas()
-const eventbridge = new EventBridge()
+const schemas = new Schemas({
+  region: process.env.REGION,
+})
+const eventbridge = new EventBridge({
+  region: process.env.REGION,
+})
 
 export const getTargetsForEventsOnEventBridge = async (eventBusName) => {
   const targetsForEvents = await eventbridge.listRules({ EventBusName: eventBusName })

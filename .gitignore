@@ -44,3 +44,5 @@ src/parsers/slate/build
 
 # Flow Ignores
 src/parsers/flow/src/lib/data/registry.json
+
+data/*
