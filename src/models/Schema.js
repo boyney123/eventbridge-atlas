@@ -7,6 +7,7 @@ export default class Schema {
     const source = Content['x-amazon-events-source']
     const detailType = Content['x-amazon-events-detail-type']
     let eventMetaData = {}
+    let sourceMetaData = {}
 
     try {
       eventMetaData = fs.readJsonSync(
@@ -16,7 +17,16 @@ export default class Schema {
       eventMetaData = {}
     }
 
+    try {
+      sourceMetaData = fs.readJsonSync(
+        path.join(__dirname, `../../data/${source}/source-metadata.json`)
+      )
+    } catch (error) {
+      sourceMetaData = {}
+    }
+
     this.eventMetaData = eventMetaData
+    this.sourceMetaData = sourceMetaData
 
     this.source = source
     this.detailType = detailType

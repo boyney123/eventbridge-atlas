@@ -27,10 +27,18 @@ export default async ({ eventBus, buildDir, registry }) => {
   const markdown = [{ h1: `AWS EventBridge: Event bus ${eventBus}` }, { p: registry.description }]
 
   Object.keys(eventsBySource).map((eventSource) => {
-    markdown.push({ h1: eventSource })
-    eventsBySource[eventSource].map((event) => {
-      const hasDescriptionsOnEventProperties = Object.keys(event.properties).length > 0
+    const { description: sourceDescription, maintainers = [] } =
+      registry.getSourceMetadata(eventSource)
 
+    markdown.push({ h1: eventSource })
+
+    if (sourceDescription)
+      markdown.push({ p: `<strong>Description:</strong> ${sourceDescription}` })
+    if (maintainers.length > 0) {
+      markdown.push({ p: `<strong>Maintained by:</strong> ${maintainers.join(', ')}` })
+    }
+
+    eventsBySource[eventSource].map((event) => {
       markdown.push({ h2: event.detailType })
       markdown.push({ p: event.description })
 
@@ -87,8 +95,6 @@ export default async ({ eventBus, buildDir, registry }) => {
           })
         })
       }
-
-   
     })
   })
 

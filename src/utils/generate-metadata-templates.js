@@ -1,8 +1,8 @@
 require('dotenv').config({ path: path.resolve(process.cwd(), '.env') })
 import path from 'path'
 import fs from 'fs'
-import { v4 as uuid } from 'uuid';
-import jsf from 'json-schema-faker';
+import { v4 as uuid } from 'uuid'
+import jsf from 'json-schema-faker'
 
 import { getAllSchemas, getAllSchemasAsJSONSchema } from './aws'
 
@@ -14,29 +14,29 @@ const parseSchemaIntoTemplate = (test) => {
   return Object.keys(definitions).reduce((templates, definition) => {
     const { properties = {} } = definitions[definition]
 
-    const definitionLowerCase = definition.toLocaleLowerCase();
+    const definitionLowerCase = definition.toLocaleLowerCase()
 
     templates[definitionLowerCase] = templates[definitionLowerCase] || {}
 
     templates[definitionLowerCase] = Object.keys(properties).reduce((newProperties, property) => {
       const { type, $ref } = properties[property]
 
-      if($ref){
+      if ($ref) {
         return newProperties
       }
 
       newProperties[property] = {
         type,
         description: '',
-        example: ''
+        example: '',
       }
 
       return newProperties
     }, {})
 
     // remove any data we are not interested in
-    if(Object.keys(templates[definitionLowerCase]).length === 0){
-      delete templates[definitionLowerCase];
+    if (Object.keys(templates[definitionLowerCase]).length === 0) {
+      delete templates[definitionLowerCase]
     }
 
     return templates
@@ -73,36 +73,44 @@ const generateMetadataFromSchemas = async () => {
 
     const events = schemasGroupedBySource[source]
 
-    Object.keys(events).forEach((event) => {
+    fs.writeFileSync(
+      `${folderDir}/source-metadata.json`,
+      JSON.stringify(
+        {
+          description: '',
+          maintainers: [],
+        },
+        null,
+        4
+      )
+    )
 
-      const { detail } = jsf.generate(events[event].JSONSchema);
+    Object.keys(events).forEach((event) => {
+      const { detail } = jsf.generate(events[event].JSONSchema)
 
       const extendedSchema = parseSchemaIntoTemplate(events[event])
 
       const file = {
         description: `${event} event raised on the ${source} event source`,
         detail: {
-          ...extendedSchema
+          ...extendedSchema,
         },
         example: {
-          "detail-type": event,
-          "resources": [],
-          "detail": detail,
-          "id": uuid(),
-          "source": source,
-          "time": new Date(),
-          "region": process.env.REGION,
-          "version": events[event].SchemaVersion,
-          "account": "YOUR_ACCOUNT"
-        }
+          'detail-type': event,
+          resources: [],
+          detail: detail,
+          id: uuid(),
+          source: source,
+          time: new Date(),
+          region: process.env.REGION,
+          version: events[event].SchemaVersion,
+          account: 'YOUR_ACCOUNT',
+        },
       }
 
       fs.writeFileSync(`${folderDir}/${event}.json`, JSON.stringify(file, null, 4))
     })
   })
-
 }
 
 generateMetadataFromSchemas()
-
-

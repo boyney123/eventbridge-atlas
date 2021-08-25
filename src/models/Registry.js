@@ -1,4 +1,6 @@
 import Schema from './Schema'
+import fs from 'fs-extra'
+import path from 'path'
 
 export default class Registry {
   constructor(awsSchemas, allRulesForEvents, eventBusName) {
@@ -24,7 +26,15 @@ export default class Registry {
     )
   }
 
-  getEvents(){
+  getSourceMetadata(source) {
+    try {
+      return fs.readJsonSync(path.join(__dirname, `../../data/${source}/source-metadata.json`))
+    } catch (error) {
+      return {}
+    }
+  }
+
+  getEvents() {
     return this.events
   }
 
