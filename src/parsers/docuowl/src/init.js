@@ -11,12 +11,13 @@ export default async ({ buildDir, registry }) => {
   const makeDocs = registry.getEvents().map(async (schema) => {
     const source = schema.source
     const detailType = schema.detailType
+    const { description: sourceDescription, maintainers = [] } = registry.getSourceMetadata(source)
 
     await fs.ensureDirSync(path.join(buildDir, source))
 
     await fs.writeFileSync(
       path.join(buildDir, `${source}/meta.md`),
-      generateSourceMetadata({ source, sourceDescription: schema.sourceDescription })
+      generateSourceMetadata({ source, sourceDescription: sourceDescription, maintainers })
     )
 
     // Generate the file for each detail type

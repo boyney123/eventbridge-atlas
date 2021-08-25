@@ -36,18 +36,30 @@ export default memo(({ registry = {} }) => {
       const eventNodeWidth = 450
       const paddingBetweenSourceAndEvents = 50
       const ruleHeight = 120
+      let sourceMetadata = {}
 
       const eventSourceYPosition = eventSourceIndex * (10 + sourceNodeHeight) + currentYPosition
 
       const eventsForSource = eventsGroupedByEventSource[eventSource]
 
-      const sourceYPosition = currentYPosition + (eventsForSource.length * eventNodeHeight) / 2
+      const { description, maintainers = [] } =
+        eventsForSource.find((event) => event?.sourceMetaData?.description !== undefined)
+          ?.sourceMetaData || {}
+
+      const sourceYPosition =
+        currentYPosition +
+        (eventsForSource.length * eventNodeHeight) / 2 -
+        (description ? eventNodeHeight / 2 : 0)
 
       // The soruce node
       const sourceNode = {
         id: eventSource,
         type: 'sourceNode', // input node
-        data: { source: eventSource, description },
+        data: {
+          source: eventSource,
+          description,
+          maintainers,
+        },
         style: { width: 'auto' },
         position: {
           x: 0,
