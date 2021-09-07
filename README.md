@@ -1,7 +1,7 @@
 <div align="center">
 
-<h2>AWS EventBridge Atlas 🗺</h2>
-<p>Document, Discover and Share AWS EventBridge Schemas.</>
+<h2>EventBridge Atlas 🗺</h2>
+<p>Document, Discover and Share Amazon EventBridge Schemas.</>
 
 [![MIT License][license-badge]][license]
 [![PRs Welcome][prs-badge]][prs]
@@ -31,7 +31,7 @@ Over a period of time more events are added to our domain, requirements change, 
 
 It can become difficult to know and understand what events are flowing within our domain.
 
-I'm a huge fan of AWS EventBridge and I wrote this tool to help engineers gain and keep an understanding of events that flow through their domain.
+I'm a huge fan of Amazon EventBridge and I wrote this tool to help engineers gain and keep an understanding of events that flow through their domain.
 
 # This solution
 
