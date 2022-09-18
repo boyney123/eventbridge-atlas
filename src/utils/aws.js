@@ -58,7 +58,7 @@ export const buildSchema = (rawSchema) => {
 }
 
 export const buildTargets = (busRules) => {
-  return busRules.reduce((rules, rule) => {
+  return busRules.filter(busRule => busRule.EventPattern !== undefined).reduce((rules, rule) => {
     const eventPattern = JSON.parse(rule.EventPattern)
     const detailType = eventPattern['detail-type'] || []
     detailType.forEach((detail) => {
